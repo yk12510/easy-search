@@ -1,7 +1,9 @@
 $(function () {
+    var search = $('#search-container');
+
     /* Logo字体颜色随机 */
     var randomColor = ['#4285f4', '#ea4335', '#fbbc05', '#34a853'];
-    $('#search-container').find('.search-logo .random-color').each(function () {
+    search.find('.search-logo .random-color').each(function () {
         $(this).css('color', randomColor[parseInt(getRandomNum(0, 4))]);
     });
 });
