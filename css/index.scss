@@ -37,7 +37,8 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
-    width: 5.4rem;
+    width: 95%;
+    max-width: 13rem;
     text-align: center;
     .search-logo {
         display: inline-block;
@@ -45,7 +46,7 @@ ul {
         font-size: 0;
 
         .random-color {
-            font-size: 0.7rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
     }
@@ -54,13 +55,13 @@ ul {
         width: 100%;
 
         form {
-            line-height: 0.4rem;
+            line-height: 0.8rem;
             .input {
                 display: inline-block;
                 padding: 0 0.15rem;
-                width: calc(100% - 1.8rem);
-                font-size: 0.16rem;
-                line-height: 0.4rem;
+                width: calc(100% - 3rem);
+                font-size: 0.5rem;
+                line-height: 0.8rem;
                 outline: none;
                 border: 1px solid #329efe;
                 border-right: 0;
@@ -69,24 +70,24 @@ ul {
             }
             .engine {
                 display: inline-block;
-                width: 1rem;
-                font-size: 0.16rem;
+                width: 1.6rem;
+                font-size: 0.3rem;
                 text-align: right;
                 border-top: 1px solid #329efe;
                 border-bottom: 1px solid #329efe;
                 cursor: pointer;
                 img {
                     margin: -1px 6px 0 4px;
-                    width: 14px;
+                    width: 0.2rem;
                     vertical-align: middle;
                 }
             }
             .submit {
                 display: inline-block;
-                width: 0.8rem;
+                width: 1.4rem;
                 color: #fff;
-                font-size: 0.16rem;
-                line-height: 0.4rem;
+                font-size: 0.3rem;
+                line-height: 0.8rem;
                 background: #329efe;
                 outline: none;
                 border: none;
