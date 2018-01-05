@@ -51,6 +51,7 @@ ul {
         }
     }
     .search-form {
+        position: relative;
         display: inline-block;
         width: 100%;
 
@@ -69,6 +70,7 @@ ul {
                 border-bottom-left-radius: 4px;
             }
             .engine {
+                position: relative;
                 display: inline-block;
                 width: 1.6rem;
                 font-size: 0.3rem;
@@ -99,9 +101,10 @@ ul {
 
         #engine {
             position: absolute;
-            right: 0;
-            top: calc(100% + 5px);
-            width: 1.7rem;
+            left: 0;
+            top: 100%;
+            margin-top: 5px;
+            padding: 0;
             border: 1px solid #eee;
             border-radius: 4px;
             li {
@@ -122,6 +125,7 @@ ul {
             width: 100%;
             border: 1px solid #eee;
             border-radius: 4px;
+            padding: 0;
         }
         li:hover {
             background: #eee;

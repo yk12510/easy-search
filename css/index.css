@@ -47,6 +47,7 @@ ul {
       font-size: 1.1rem;
       font-weight: 600; }
   #search-container .search-form {
+    position: relative;
     display: inline-block;
     width: 100%; }
     #search-container .search-form form {
@@ -63,6 +64,7 @@ ul {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px; }
       #search-container .search-form form .engine {
+        position: relative;
         display: inline-block;
         width: 1.6rem;
         font-size: 0.3rem;
@@ -88,9 +90,10 @@ ul {
         cursor: pointer; }
     #search-container .search-form #engine {
       position: absolute;
-      right: 0;
-      top: calc(100% + 5px);
-      width: 1.7rem;
+      left: 0;
+      top: 100%;
+      margin-top: 5px;
+      padding: 0;
       border: 1px solid #eee;
       border-radius: 4px; }
       #search-container .search-form #engine li img {
@@ -106,7 +109,8 @@ ul {
       left: 0;
       width: 100%;
       border: 1px solid #eee;
-      border-radius: 4px; }
+      border-radius: 4px;
+      padding: 0; }
     #search-container .search-form li:hover {
       background: #eee; }
 

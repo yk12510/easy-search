@@ -24,20 +24,23 @@
         </div>
         <div class="search-form">
             <form action="https://www.google.com.hk/search" method="get">
-                <input type="text" name="q" class="fl border-box input">
-                <span class="fl border-box engine">Google<img src="images/arrow_down.png"/>
+                <input type="text" name="q" class="fl border-box input keyword">
+                <span class="fl border-box engine">
+                    <span>Google</span>
+                    <img src="images/arrow_down.png"/>
                     <ul class="hide border-box" id="engine">
                         <li engine="baidu"><img src="images/baidu_logo.png"/>百度</li>
-                        <li engine="Google"><img src="images/google_logo.ico"/>Google</li>
+                        <li engine="google"><img src="images/google_logo.ico"/>Google</li>
                     </ul>
                 </span>
                 <button type="submit" class="fl border-box submit">搜      索</button>
             </form>
-            <ul class="hide border-box" id="guess-word"><li>dsdsd</li></ul>
+            <ul class="hide border-box" id="guess-word"></ul>
         </div>
     </div>
 
     <script src="js/jquery.3.2.1.min.js"></script>
+    <script src="js/jquery.cookie.1.4.1.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
