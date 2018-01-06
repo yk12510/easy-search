@@ -8,24 +8,24 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <div id="search-container">
-        <div class="search-logo">
-            <span class="random-color">E</span>
-            <span class="random-color">a</span>
-            <span class="random-color">s</span>
-            <span class="random-color">y</span>
-            <span class="random-color">&nbsp;</span>
-            <span class="random-color">S</span>
-            <span class="random-color">e</span>
-            <span class="random-color">a</span>
-            <span class="random-color">r</span>
-            <span class="random-color">c</span>
-            <span class="random-color">h</span>
-        </div>
-        <div class="search-form">
-            <form action="https://www.google.com.hk/search" method="get">
-                <input type="text" name="q" class="fl border-box input keyword">
-                <span class="fl border-box engine">
+<div id="search-container">
+    <div class="search-logo">
+        <span class="random-color">E</span>
+        <span class="random-color">a</span>
+        <span class="random-color">s</span>
+        <span class="random-color">y</span>
+        <span class="random-color">&nbsp;</span>
+        <span class="random-color">S</span>
+        <span class="random-color">e</span>
+        <span class="random-color">a</span>
+        <span class="random-color">r</span>
+        <span class="random-color">c</span>
+        <span class="random-color">h</span>
+    </div>
+    <div class="search-form">
+        <form action="https://www.google.com.hk/search" method="get">
+            <input type="text" name="q" class="fl border-box input keyword" autocomplete="off">
+            <span class="fl border-box engine">
                     <span>Google</span>
                     <img src="images/arrow_down.png"/>
                     <ul class="hide border-box" id="engine">
@@ -33,14 +33,14 @@
                         <li engine="google"><img src="images/google_logo.ico"/>Google</li>
                     </ul>
                 </span>
-                <button type="submit" class="fl border-box submit">搜      索</button>
-            </form>
+            <button type="submit" class="fl border-box submit">搜 索</button>
             <ul class="hide border-box" id="guess-word"></ul>
-        </div>
+        </form>
     </div>
+</div>
 
-    <script src="js/jquery.3.2.1.min.js"></script>
-    <script src="js/jquery.cookie.1.4.1.min.js"></script>
-    <script src="js/index.js"></script>
+<script src="js/jquery.3.2.1.min.js"></script>
+<script src="js/jquery.cookie.1.4.1.min.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
