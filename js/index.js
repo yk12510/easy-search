@@ -56,7 +56,7 @@ $(function () {
         clearTimeout(timer2);
         timer2 = setTimeout(function () {
             var value = obj.val();
-            if (!value) {
+            if (!value || value === ' ') {
                 hotword.hide();
             } else if (value !== oldHotword) {
                 oldHotword = value;
@@ -91,7 +91,7 @@ $(function () {
                     }
                     hotword.html(str);
                     hotwordIndex = -1;
-                    res.length ? hotword.show() : hotword.hide();
+                    count || res.length ? hotword.show() : hotword.hide();
                 });
             }
         }, 200);
