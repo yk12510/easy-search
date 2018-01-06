@@ -58,62 +58,59 @@ $(function () {
             var value = obj.val();
             if (value && value !== oldHotword) {
                 oldHotword = value;
-                var engine = 'google';
                 var param = engineJson[engine].param;
-                param[engineJson[engine].hotword] = value;
-                publicAjax(engineJson[engine].hotwordUrl, 'get', param, function (data) {
+                for (var i = 0; i < engineJson[engine].hotword.length; i++) {
+                    param[engineJson[engine].hotword[i]] = value;
+                }
+                publicAjax(engineJson[engine].hotwordUrl, 'get', param, engineJson[engine].param2, function (data) {
                     var str = '';
                     var historyKeyword = JSON.parse($.cookie('historyKeyword') || '[]');
-                    if (engine === 'google') {
-                        var res = data[1];
-                        var count = 0;
-                        if (res.length) {
-                            for (var i = 0; i < historyKeyword.length; i++) {
-                                if (historyKeyword[i].indexOf(value) > -1) {
-                                    str += '<li>' + historyKeyword[i] + '</li>';
-                                    count++;
-                                }
-                                if (count > 1) break;
+                    var res = data[engineJson[engine].resIndex[0]] || [];
+                    var count = 0;
+                    if (res.length) {
+                        for (var i = 0; i < historyKeyword.length; i++) {
+                            if (historyKeyword[i].indexOf(value) > -1) {
+                                str += '<li>' + historyKeyword[i] + '</li>';
+                                count++;
                             }
-                        } else {
-                            for (var i = 0; i < historyKeyword; i++) {
-                                if (historyKeyword[i].indexOf(value) > -1) {
-                                    str += '<li>' + historyKeyword[i] + '</li>';
-                                    count++;
-                                }
-                                if (count > 9) break;
+                            if (count > 1) break;
+                        }
+                    } else {
+                        for (var i = 0; i < historyKeyword; i++) {
+                            if (historyKeyword[i].indexOf(value) > -1) {
+                                str += '<li>' + historyKeyword[i] + '</li>';
+                                count++;
                             }
-                        }
-                        for (var i = 0; i < res.length; i ++) {
-                            str += '<li>' + res[i][0] + '</li>';
-                        }
-                        hotword.html(str);
-                        if (res.length) {
-                            hotwordIndex = -1;
-                            hotword.show();
+                            if (count > 9) break;
                         }
                     }
+                    for (var i = 0; i < res.length; i++) {
+                        str += '<li>' + res[i][engineJson[engine].resIndex[1]] + '</li>';
+                    }
+                    hotword.html(str);
+                    hotwordIndex = -1;
+                    res.length ? hotword.show() : hotword.hide();
                 });
             }
         }, 200);
-    }).on('focus', function (){
+    }).on('focus', function () {
         if ($(this).val()) {
             hotword.show();
         }
     });
     /*
-    * 热词显示隐藏事件处理
-    * 选择热词
-    * */
+     * 热词显示隐藏事件处理
+     * 选择热词
+     * */
     var hotwordIndex = -1;
-    $(document).on('mouseup',function(e){
+    $(document).on('mouseup', function (e) {
         var _con = form;   // 设置目标区域
-        if(!_con.is(e.target) && _con.has(e.target).length === 0){ // Mark 1
+        if (!_con.is(e.target) && _con.has(e.target).length === 0) { // Mark 1
             hotword.hide();
             hotword.find('li').removeClass('active');
         }
-    }).on('keyup', function(e){
-        if(!hotword.is(':hidden') && (e.keyCode === 38 || e.keyCode === 40)){
+    }).on('keyup', function (e) {
+        if (!hotword.is(':hidden') && (e.keyCode === 38 || e.keyCode === 40)) {
             var lis = hotword.find('li');
             var len = lis.length;
             if (e.keyCode === 38) { // 上键
@@ -156,14 +153,32 @@ var engineJson = {
     baidu: {
         name: '百度',
         formUrl: 'https://www.baidu.com/s',
-        keyword: 'wd'
+        keyword: 'wd',
+        hotwordUrl: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+        hotword: ['wd', 'bs'],
+        resIndex: ['g', 'q'],
+        param: {
+            sugmode: 2,
+            json: 1,
+            p: 3,
+            sid: '1442_19033_21106_22075',
+            req: 2,
+            csor: 3,
+            _: 1515232785712
+        },
+        param2: {
+            dataType : "jsonp",
+            jsonp: "cb",
+            jsonpCallback:"success"
+        }
     },
     google: {
         name: 'Google',
         formUrl: 'https://www.google.com.hk/search',
         keyword: 'q',
         hotwordUrl: 'https://www.google.com.hk/complete/search',
-        hotword: 'q',
+        hotword: ['q'],
+        resIndex: [1, 0],
         param: {
             client: 'psy-ab',
             hl: 'zh-CN',
@@ -173,6 +188,11 @@ var engineJson = {
             cp: 3,
             gs_id: '1jm',
             xhr: 't'
+        },
+        param2: {
+            dataType : "jsonp",
+            jsonp: "callback",
+            jsonpCallback:"success"
         }
     }
 };
@@ -189,17 +209,19 @@ function getRandomNum(min, max) {
 /*
  * 公用ajax方法
  * */
-function publicAjax(url, type, parameter, fn) {
-    if (typeof fn != 'function') {
-        flavrShowByTime("回调必须是个函数,function", null, "danger", false);
+function publicAjax(url, type, parameter, parameter2, fn) {
+    if (typeof parameter2 === 'function') {
+        fn = parameter2;
+        parameter2 = {};
+    }
+    if (typeof fn !== 'function') {
+        alert("回调必须是个函数,function");
         return;
     }
 
-    $.ajax({
+    $.ajax($.extend({}, {
         url: url,
         type: type,
-        jsonp: "callback",
-        dataType: "jsonp",
         data: parameter,
         success: function (data) {
             fn(data);
@@ -207,5 +229,5 @@ function publicAjax(url, type, parameter, fn) {
         error: function (data) {
             console.log("出错la。。。。");
         }
-    });
+    }, parameter2));
 }
