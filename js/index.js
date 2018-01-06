@@ -56,7 +56,9 @@ $(function () {
         clearTimeout(timer2);
         timer2 = setTimeout(function () {
             var value = obj.val();
-            if (value && value !== oldHotword) {
+            if (!value) {
+                hotword.hide();
+            } else if (value !== oldHotword) {
                 oldHotword = value;
                 var param = engineJson[engine].param;
                 for (var i = 0; i < engineJson[engine].hotword.length; i++) {
@@ -70,7 +72,7 @@ $(function () {
                     if (res.length) {
                         for (var i = 0; i < historyKeyword.length; i++) {
                             if (historyKeyword[i].indexOf(value) > -1) {
-                                str += '<li>' + historyKeyword[i] + '</li>';
+                                str += '<li>' + boldValue(historyKeyword[i], value) + '</li>';
                                 count++;
                             }
                             if (count > 1) break;
@@ -78,14 +80,14 @@ $(function () {
                     } else {
                         for (var i = 0; i < historyKeyword; i++) {
                             if (historyKeyword[i].indexOf(value) > -1) {
-                                str += '<li>' + historyKeyword[i] + '</li>';
+                                str += '<li>' + boldValue(historyKeyword[i], value) + '</li>';
                                 count++;
                             }
                             if (count > 9) break;
                         }
                     }
                     for (var i = 0; i < res.length; i++) {
-                        str += '<li>' + res[i][engineJson[engine].resIndex[1]] + '</li>';
+                        str += '<li>' + boldValue(res[i][engineJson[engine].resIndex[1]], value) + '</li>';
                     }
                     hotword.html(str);
                     hotwordIndex = -1;
@@ -230,4 +232,16 @@ function publicAjax(url, type, parameter, parameter2, fn) {
             console.log("出错la。。。。");
         }
     }, parameter2));
+}
+
+/*
+* 加粗输入词
+* */
+function boldValue(str, val) {
+    var arr = str.split(val);
+    var str1 = '';
+    for(var i = 0; i < arr.length; i++) {
+        str1 += arr[i] + ((i === arr.length - 1) ? '' : '<b>' + val + '</b>');
+    }
+    return str1;
 }
