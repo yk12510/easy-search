@@ -78,7 +78,7 @@ $(function () {
                             if (count > 1) break;
                         }
                     } else {
-                        for (var i = 0; i < historyKeyword; i++) {
+                        for (var i = 0; i < historyKeyword.length; i++) {
                             if (historyKeyword[i].indexOf(value) > -1) {
                                 str += '<li>' + boldValue(historyKeyword[i], value) + '</li>';
                                 count++;
@@ -96,7 +96,7 @@ $(function () {
             }
         }, 200);
     }).on('focus', function () {
-        if ($(this).val()) {
+        if ($(this).val() && hotword.find('li').length) {
             hotword.show();
         }
     });
